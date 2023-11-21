@@ -11,7 +11,7 @@ import SwiftUI
 struct PALVADEAU_FlorianApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContactView(allContacts: Contacts(contacts: ContactSchema.previewContact))
         }
     }
 }
