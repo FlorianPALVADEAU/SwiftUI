@@ -63,7 +63,7 @@ struct ContactView: View {
 
 
 struct ContactRow: View {
-    var contact: ContactSchema
+    @ObservedObject var contact: ContactSchema
 
     var body: some View {
         HStack {

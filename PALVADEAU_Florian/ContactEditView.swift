@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct EditContactView: View {
     @Binding var contacts: [ContactSchema]
@@ -7,6 +8,12 @@ struct EditContactView: View {
     @State private var lastName: String
     @State private var phoneNumber: String
     @State private var isFavorite: Bool
+    @State private var localisation: String
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
+        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+    )
+    
     let halfWindowWidth = (UIScreen.main.bounds.width * 0.5)
     var contact: ContactSchema
     @Environment(\.presentationMode) var presentationMode
@@ -19,6 +26,8 @@ struct EditContactView: View {
         self._lastName = State(initialValue: contact.lastName)
         self._phoneNumber = State(initialValue: String(contact.phoneNumber))
         self._isFavorite = State(initialValue: contact.isFavorite)
+        self._localisation = State(initialValue: contact.localisation)
+
     }
 
     var body: some View {
@@ -45,6 +54,20 @@ struct EditContactView: View {
                 Section(header: Text("Options")) {
                     Toggle("Favori", isOn: $isFavorite)
                 }
+                
+                Section(header: Text("Localisation")) {
+                    TextField("Localisation", text: $localisation, onEditingChanged: { isEditing in
+                        if !isEditing {
+                            geocodeCity()
+                        }
+                    })
+                    .onAppear {
+                        geocodeCity()
+                    }
+
+                    Map(coordinateRegion: $region, showsUserLocation: true)
+                        .frame(height: 200)
+                }
 
                 Section {
                     Button(action: {
@@ -53,7 +76,9 @@ struct EditContactView: View {
                             firstName: firstName,
                             lastName: lastName,
                             phoneNumber: Int(phoneNumber) ?? 0,
-                            isFavorite: isFavorite
+                            isFavorite: isFavorite,
+                            localisation: localisation
+
                         )
                         if let index = contacts.firstIndex(where: { $0.id == contact.id }) {
                             contacts[index].profilePictureURL = profilePicture
@@ -61,6 +86,7 @@ struct EditContactView: View {
                             contacts[index].lastName = lastName
                             contacts[index].phoneNumber = Int(phoneNumber) ?? 0
                             contacts[index].isFavorite = isFavorite
+                            contacts[index].localisation = localisation
 
                             presentationMode.wrappedValue.dismiss()
                         }
@@ -69,6 +95,16 @@ struct EditContactView: View {
                     }
                 }
             }
+        }
+    }
+    
+    private func geocodeCity() {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(localisation) { placemarks, error in
+            guard let placemark = placemarks?.first, let location = placemark.location else {
+                return
+            }
+            region.center = location.coordinate
         }
     }
 }
