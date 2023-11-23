@@ -10,6 +10,7 @@
 		1A28C5D42B0B6C430030676A /* PALVADEAU_FlorianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28C5D32B0B6C430030676A /* PALVADEAU_FlorianApp.swift */; };
 		1A28C5D82B0B6C450030676A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A28C5D72B0B6C450030676A /* Assets.xcassets */; };
 		1A28C5DB2B0B6C450030676A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A28C5DA2B0B6C450030676A /* Preview Assets.xcassets */; };
+		1A4EF69E2B0F45E100163A7F /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4EF69D2B0F45E100163A7F /* ContactStore.swift */; };
 		1A54C45F2B0BA32B00042C1C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A54C45E2B0BA32B00042C1C /* Contact.swift */; };
 		1A9281602B0CAE72002C4B10 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A92815F2B0CAE72002C4B10 /* ContactView.swift */; };
 		1A9281622B0CAF04002C4B10 /* ContactCreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9281612B0CAF04002C4B10 /* ContactCreateView.swift */; };
@@ -23,6 +24,7 @@
 		1A28C5D32B0B6C430030676A /* PALVADEAU_FlorianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PALVADEAU_FlorianApp.swift; sourceTree = "<group>"; };
 		1A28C5D72B0B6C450030676A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A28C5DA2B0B6C450030676A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1A4EF69D2B0F45E100163A7F /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		1A54C45E2B0BA32B00042C1C /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		1A92815F2B0CAE72002C4B10 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		1A9281612B0CAF04002C4B10 /* ContactCreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCreateView.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				1A9281692B0CC698002C4B10 /* ContactEditView.swift */,
 				1A9281652B0CB170002C4B10 /* ContactSingleView.swift */,
 				1A54C45E2B0BA32B00042C1C /* Contact.swift */,
+				1A4EF69D2B0F45E100163A7F /* ContactStore.swift */,
 				1A28C5D72B0B6C450030676A /* Assets.xcassets */,
 				1A28C5D92B0B6C450030676A /* Preview Content */,
 			);
@@ -158,6 +161,7 @@
 				1A9281602B0CAE72002C4B10 /* ContactView.swift in Sources */,
 				1A92816A2B0CC698002C4B10 /* ContactEditView.swift in Sources */,
 				1A92816C2B0CF9C3002C4B10 /* ContactCell.swift in Sources */,
+				1A4EF69E2B0F45E100163A7F /* ContactStore.swift in Sources */,
 				1A28C5D42B0B6C430030676A /* PALVADEAU_FlorianApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

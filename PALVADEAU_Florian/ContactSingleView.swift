@@ -39,7 +39,7 @@ struct ContactDetailView: View {
                     .padding()
             }
             Text("\(contact.localisation)")
-            WeatherView(city: contact.localisation, weatherData: $weatherData, updateCounter: $updateCounter)
+            WeatherView(city: contact.localisation, weatherData: $weatherData)
             .onAppear {
                 geocodeCity()
             }
@@ -76,18 +76,18 @@ struct ContactDetailView: View {
 struct WeatherView: View {
     let city: String
     @Binding var weatherData: WeatherData?
-    @State private var currentUpdateCounter: Int
+    @State private var currentUpdateCounter: Int = 0
 
     init(city: String, weatherData: Binding<WeatherData?>) {
         self.city = city
         _weatherData = weatherData
-        _currentUpdateCounter = State(initialValue: updateCounter.wrappedValue)
+        _currentUpdateCounter = State(initialValue: currentUpdateCounter)
     }
 
     var body: some View {
         VStack {
             if let weatherData = weatherData {
-                Text("- \(roundedTemperature(weatherData.main.temp))°C - \(weatherData.weather.first?.description ?? "")")
+                Text("\(roundedTemperature(weatherData.main.temp))°C - \(weatherData.weather.first?.description ?? "")")
             } else {
                 Text("Chargement des données météo...")
                     .onAppear {

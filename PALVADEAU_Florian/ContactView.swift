@@ -12,6 +12,8 @@ struct ContactView: View {
     @State private var showCreateContact = false
     @State private var showSuccessPopup = false
     @State private var sortByFavorite: Bool = false
+    let saveAction: ()->Void
+    @Environment(\.scenePhase) private var scenePhase
 
     var filteredContacts: [ContactSchema] {
         if sortByFavorite {
@@ -54,8 +56,8 @@ struct ContactView: View {
             .sheet(isPresented: $showCreateContact) {
                 CreateContactView(contacts: allContacts, showSuccessPopup: $showSuccessPopup)
             }
-            .alert(isPresented: $showSuccessPopup) {
-                Alert(title: Text("Succès"), message: Text("Utilisateur créé avec succès"), dismissButton: .default(Text("OK")))
+            .onChange(of: scenePhase) { phase in
+                if phase == .inactive { saveAction() }
             }
         }
     }
@@ -97,6 +99,6 @@ struct ContactRow: View {
 struct ContactView_Previews: PreviewProvider {
 
     static var previews: some View {
-        ContactView(allContacts: Contacts(contacts: ContactSchema.previewContact))
+        ContactView(allContacts: Contacts(contacts: ContactSchema.previewContact), saveAction: {})
     }
 }

@@ -9,9 +9,25 @@ import SwiftUI
 
 @main
 struct PALVADEAU_FlorianApp: App {
+    @StateObject private var storeCollection: Contacts = Contacts(contacts: [])
     var body: some Scene {
         WindowGroup {
-            ContactView(allContacts: Contacts(contacts: ContactSchema.previewContact))
+            ContactView(allContacts: storeCollection) {
+                Task {
+                    do {
+                        try await ContactStore.save(contacts: storeCollection.contacts)
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
+            .task {
+                do {
+                    storeCollection.contacts = try await ContactStore.load()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+            }
         }
     }
 }

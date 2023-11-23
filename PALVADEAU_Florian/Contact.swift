@@ -15,7 +15,10 @@ class Contacts: ObservableObject {
     }
 }
 
-class ContactSchema: Identifiable, ObservableObject {
+class ContactSchema: Identifiable, ObservableObject, Codable {
+    enum CodingKeys: CodingKey {
+            case profilePictureURL, firstName, lastName, phoneNumber, isFavorite, localisation
+    }
     var id: UUID = UUID()
     @Published var profilePictureURL: String
     @Published var firstName: String
@@ -33,6 +36,33 @@ class ContactSchema: Identifiable, ObservableObject {
         self.localisation = localisation
 
     }
+    
+    func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+
+            try container.encode(profilePictureURL, forKey: .profilePictureURL)
+            try container.encode(firstName, forKey: .firstName)
+
+            try container.encode(lastName, forKey: .lastName)
+            try container.encode(phoneNumber, forKey: .phoneNumber)
+
+            try container.encode(isFavorite, forKey: .isFavorite)
+            try container.encode(localisation, forKey: .localisation)
+            
+        }
+        
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            profilePictureURL = try container.decode(String.self, forKey: .profilePictureURL)
+            firstName = try container.decode(String.self, forKey: .firstName)
+
+            lastName = try container.decode(String.self, forKey: .lastName)
+            phoneNumber = try container.decode(Int.self, forKey: .phoneNumber)
+
+            isFavorite = try container.decode(Bool.self, forKey: .isFavorite)
+            localisation = try container.decode(String.self, forKey: .localisation)
+        }
 
 }
 
